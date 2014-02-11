@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AisleIQ</title>
+        <link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.0/css/themes/default/jquery.mobile-1.4.0.min.css">
+        <link rel="shortcut icon" href="http://demos.jquerymobile.com/1.4.0/favicon.ico">
+        <script src="http://demos.jquerymobile.com/1.4.0/js/jquery.js"></script>
+
+        <script type="text/javascript">
+            $(document).bind("mobileinit", function() {
+            });
+        </script>
+
+        <script src="http://demos.jquerymobile.com/1.4.0/js/jquery.mobile-1.4.0.min.js"></script>
+        <script>
+            $(document).on("pagecreate", function() {
+                $("#testpage").removeClass("ui-page-theme-a ui-page-theme-b");
+                $("#navbar").removeClass("ui-page-theme-a ui-page-theme-b").addClass("ui-page-theme-" + "a");
+                $("#header").removeClass("ui-page-theme-a ui-page-theme-b").addClass("ui-page-theme-" + "a");
+                $("#footer").removeClass("ui-page-theme-a ui-page-theme-b").addClass("ui-page-theme-" + "a");
+                $(".theme").text("b");
+            });
+        </script>
+        <style>
+            .noshadow * {
+                -webkit-box-shadow: none !important;
+                -moz-box-shadow: none !important;
+                box-shadow: none !important;
+            }
+            form.ui-mini .ui-field-contain fieldset.ui-controlgroup legend small {
+                color: #666;
+            }
+
+            /* align select controls with navbar buttons */
+            .ui-select {
+                margin-top: 0em !important;
+            }
+
+            #logo_image {
+                text-align: center;
+                margin: 0 auto;
+            }
+
+            span.mark-for-delete {
+                color: red;
+                text-decoration:line-through;
+            }
+        </style>
+    </head>
+    <body>
+        <div data-role="page" id="testpage" style="background-color:white" data-add-back-btn="true">
+            <div data-role="header" id="header" data-back-btn-text="previous">
+                <a href="#" data-rel="back" data-icon="back">Back</a>
+                <h1><img src="images/aiqlogo_mini.png" style="align:center"/></h1>
+
+                <a href="#popupMenu" data-rel="popup" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-icon-notext"></a>
+                <div data-role="popup" id="popupMenu" data-theme="a">
+                    <ul data-role="listview" data-inset="true" style="min-width:210px;">
+                        <li><a class="ui-btn ui-shadow ui-btn-inline ui-btn-icon-left ui-btn-a ui-icon-info" href="#">Preferences</a></li>
+                    </ul>
+                </div>
+                <div data-role="navbar" id="navbar" data-add-back-btn="true">
+                    <ul>
+                        <li>
+                            <select data-mini="true" style="margin-top:0px" id="store_filter" name="store_filter">
+                                <option value="">All stores</option>
+                                <option value="24">Bert&#39;s Red Apple</option>
+                                <option value="31">Bridle Trails Red Apple</option>
+                                <option value="78">Lam&#39;s Seafood Market</option>
+                                <option value="100">Leschi Market</option>
+                                <option value="93">PCC Edmonds</option>
+                                <option value="84">Ralph&#39;s Thriftway</option>
+                                <option value="102">Vashon Market IGA</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div><!-- /header -->
+            </div>
+            <div class="ui-content" role="main">
+                <p></p>
+                <div id="logo_image">
+                    <img src="images/aiqlogo.png" style="align:center"/>
+                </div>
+                <p></p>
+                <form>
+                    <label for="search" id='search_text' style="text-align:center">
+                        Find a product
+                    </label>
+                    <input type="search" id="search" placeholder="Enter a product name or UPC" />
+
+                </form>
+            </div><!-- /content -->
+
+            <div data-role="content" data-theme="a">
+                <div class="swipe_area">
+                <ul data-role="listview" data-count-theme="a" data-icon="false">
+                    <li><a href="List.html" rel="external"><span>Today </span><span class="ui-li-count">12</span></a></li>
+                    <li><a href="List.html" rel="external"><span>Tomorrow </span><span class="ui-li-count">0</span></a></li>
+                    <li><a href="list.html" rel="external"><span>Example To Do List</span> <span class="ui-li-count">4</span></a></li>
+                    <li><a href="list.html" rel="external"><span>Instructions </span><span class="ui-li-count">328</span></a></li>
+                </ul><!-- /content -->
+                </div><!-- End of swipe area -->
+            </div>
+            <div data-role="popup" id="popupContext" data-theme="a">
+                <ul data-role="listview" data-inset="true">
+                    <li><a href="#">Open</a></li>
+                    <li><a href="#">Rename</a></li>
+                    <li><a href="#">Delete</a></li>
+                </ul>
+            </div>
+            <div data-role="footer" id="footer" data-position="fixed">
+                <ul data-role="listview" data-split-icon="plus" data-theme="a" data-split-theme="a" data-inset="true">
+                    <li><a href="#">New List</a><a href="www.aisleiq.com"></a></li>
+                </ul>
+                <h1><a href="http://www.aisleiq.com">Privacy & Terms</a></h1>
+                <h1>© 2013 AisleIQ, PIN Corporation. All rights reserved</h1>
+                <!-- /content -->
+            </div><!-- /footer -->
+        </div><!-- /page -->
+
+        <script>
+            $(function() {
+                // Bind the swiperightHandler callback function to the swipe event on div.box
+                $(".swipe_area").bind("swiperight", swiperightHandler);
+                $(".swipe_area").bind("swipeleft", swipeleftHandler);
+                $(".swipe_area").bind("taphold", tapholdHandler);
+
+                // Callback function references the event target and adds the 'swiperight' class to it
+                function swiperightHandler(event) {
+                    $(event.target).addClass("mark-for-delete");
+                }
+
+                function swipeleftHandler(event) {
+                    $(event.target).removeClass("mark-for-delete");
+                }
+
+                function tapholdHandler(event) {
+                    $("#popupContext").popup("open");
+                }
+            });
+        </script>
+    </body>
+</html>
